@@ -1,8 +1,22 @@
 <?php
 $key = "1cdbb159-0d61-42df-9d4c-0785416f1cda";
-
 require_once('jsonrpcphp/includes/jsonRPCClient.php');
-$bitcoin = new jsonRPCClient('http://bitcoinrpc:EuiuZEVwNBngVzZoer1GpVWADESf91gCFXw3N1Uxa1YN@127.0.0.1:8332/');
+$bitcoin ="";
+
+$port = "";
+if (!isset($_GET['type'])) {
+    if ($_GET['type'] == "bitcoin") {
+        $port = 8332;
+    }
+    if ($_GET['type'] == "litecoin") {
+        $port = 9332;
+    }
+    if ($_GET['type'] == "dogecoin") {
+        $port = 22555;
+    }
+}
+
+$bitcoin = new jsonRPCClient('http://bitcoinrpc:EuiuZEVwNBngVzZoer1GpVWADESf91gCFXw3N1Uxa1YN@127.0.0.1:'.$port.'/');
 
 if (!isset($_GET['key'])) {
     $data = array("error"=>1,"errormsg"=>"Invalid Key","time"=>time());
